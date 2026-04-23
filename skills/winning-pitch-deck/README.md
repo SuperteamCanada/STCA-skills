@@ -1,4 +1,4 @@
-# winning-pitch-deck
+# Create a Winning Pitch Deck
 
 A Claude skill that helps founders craft or review a 3-minute pitch deck and speaker script using the **DePitch framework** by [Sofian](https://x.com/depitchsofian) / [DePitch Academy](https://x.com/depitch_academy).
 
