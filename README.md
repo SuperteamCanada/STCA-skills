@@ -1,6 +1,6 @@
 # STCA Skills
 
-A curated collection of [Claude](https://claude.com/) skills for founders — maintained by [Superteam Canada](https://superteam.ca/).
+A curated collection of agentic skills for founders — maintained by [Superteam Canada](https://superteam.ca/).
 
 Each skill encodes a specific workflow, framework, or playbook so any founder with a Claude-powered assistant (Claude Code, Claude.ai, Copilot CLI, Gemini CLI, etc.) can tap into expert-level guidance on demand.
 
