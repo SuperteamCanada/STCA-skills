@@ -6,11 +6,34 @@ Each skill encodes a specific workflow, framework, or playbook so any founder wi
 
 ## Available skills
 
+### Pitch & Design
+
 | Skill | What it does |
 |---|---|
-| [winning-pitch-deck](./skills/winning-pitch-deck/) | Craft or review a 3-minute founder pitch deck and speaker script using the DePitch framework. Built for Colosseum Frontier; works for any short investor/judge pitch. |
+| [winning-pitch-deck](./skills/winning-pitch-deck/) | Craft or review a 3-minute founder pitch deck and speaker script using the DePitch framework. Built for Colosseum Frontier. |
+| [ui-ux-pro-max](./skills/ui-ux-pro-max/) | Design intelligence with 50+ styles, 161 color palettes, 57 font pairings, and 99 UX guidelines. Priority-ranked from accessibility to charts. |
 
-More skills coming — security review, product review, idea validation, hackathon submission prep, and others requested by the community.
+### Solana Ecosystem
+
+| Skill | What it does |
+|---|---|
+| [solana-agent](./skills/solana-agent/) | Scaffold a Solana AI agent using SendAI's Agent Kit v2 and the Solana Developer MCP. Plugin selection, embedded wallets, devnet deployment. |
+| [solana-blinks](./skills/solana-blinks/) | Build Solana Actions and Blinks — shareable transaction URLs that render natively inside X (Twitter), Phantom, and other clients. |
+| [solana-sdp](./skills/solana-sdp/) | Build on the Solana Developer Platform for enterprise payments, stablecoin issuance, and trading. Mastercard/Worldpay/Western Union-grade infrastructure. |
+| [solana-compress](./skills/solana-compress/) | Launch ZK compressed tokens using Light Protocol. 99% cost reduction for airdrops, loyalty programs, gaming assets, and mass distribution. |
+| [solana-hackathon](./skills/solana-hackathon/) | Bootstrap a hackathon project with the right 2026 primitives. Full scaffold, submission package, and time management. Pairs with all other skills. |
+
+### How they work together
+
+```
+Idea → solana-hackathon (scaffold + primitives)
+         ├── solana-agent (if AI + crypto)
+         ├── solana-blinks (if social distribution)
+         ├── solana-sdp (if payments/fintech)
+         ├── solana-compress (if mass token ops)
+         ├── ui-ux-pro-max (design the frontend)
+         └── winning-pitch-deck (pitch video)
+```
 
 ## Install a skill
 
@@ -23,8 +46,8 @@ git clone --depth 1 --filter=blob:none --sparse \
   https://github.com/SuperteamCanada/STCA-skills.git \
   ~/.claude/skills/_stca-tmp
 cd ~/.claude/skills/_stca-tmp
-git sparse-checkout set skills/winning-pitch-deck
-mv skills/winning-pitch-deck ~/.claude/skills/winning-pitch-deck
+git sparse-checkout set skills/<skill-name>
+mv skills/<skill-name> ~/.claude/skills/<skill-name>
 cd .. && rm -rf _stca-tmp
 ```
 
@@ -32,18 +55,19 @@ Or clone the whole collection and symlink what you want:
 
 ```bash
 git clone https://github.com/SuperteamCanada/STCA-skills.git ~/code/STCA-skills
-ln -s ~/code/STCA-skills/skills/winning-pitch-deck ~/.claude/skills/winning-pitch-deck
+ln -s ~/code/STCA-skills/skills/<skill-name> ~/.claude/skills/<skill-name>
 ```
 
 Restart Claude Code. The skill is available in all your sessions.
 
-### Claude.ai
+### Install all skills at once
 
-Package the skill folder into a `.skill` file (using Anthropic's `skill-creator` locally) and upload via your workspace's skill settings.
-
-### Other runtimes
-
-Each platform has its own install path — check the platform docs.
+```bash
+git clone https://github.com/SuperteamCanada/STCA-skills.git ~/code/STCA-skills
+for skill in ~/code/STCA-skills/skills/*/; do
+  ln -sf "$skill" ~/.claude/skills/$(basename "$skill")
+done
+```
 
 ## Contributing
 
