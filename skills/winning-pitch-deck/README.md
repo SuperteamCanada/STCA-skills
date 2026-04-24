@@ -15,28 +15,32 @@ Two modes, auto-detected:
 
 It enforces the non-negotiables: tense discipline (no "trying to"/"hope to"), demo before 2:00, traction with real metrics (no X followers), business-model slide, CTA instead of "thank you", one memorable line embedded.
 
+The skill outputs a markdown outline — to turn it into actual slides, it recommends tools like [Gamma](https://gamma.app), [Canva](https://canva.com), [Google Slides](https://slides.google.com), [Pitch](https://pitch.com), or [Figma](https://figma.com) depending on your design skill and timeline.
+
 ## Install
 
 ### Claude Code
 
-```bash
-git clone https://github.com/0xbenbottle/winning-pitch-deck.git \
-  ~/.claude/skills/winning-pitch-deck
-```
-
-Restart Claude Code. The skill is available to all your sessions.
-
-### Claude.ai
-
-Package the skill into a `.skill` file and upload it via your workspace's skill settings. If you have `skill-creator` installed locally:
+Clone only this skill from the collection:
 
 ```bash
-python -m scripts.package_skill /path/to/winning-pitch-deck
+git clone --depth 1 --filter=blob:none --sparse \
+  https://github.com/SuperteamCanada/STCA-skills.git \
+  ~/.claude/skills/_stca-tmp
+cd ~/.claude/skills/_stca-tmp
+git sparse-checkout set skills/winning-pitch-deck
+mv skills/winning-pitch-deck ~/.claude/skills/winning-pitch-deck
+cd .. && rm -rf _stca-tmp
 ```
 
-### Other runtimes (Copilot CLI, Gemini CLI, Codex)
+Or clone the whole collection and symlink:
 
-See each platform's skill-install docs — the skill uses Claude Code tool names, but the content is platform-neutral.
+```bash
+git clone https://github.com/SuperteamCanada/STCA-skills.git ~/code/STCA-skills
+ln -s ~/code/STCA-skills/skills/winning-pitch-deck ~/.claude/skills/winning-pitch-deck
+```
+
+Restart Claude Code. The skill is available in all your sessions.
 
 ## Usage
 
