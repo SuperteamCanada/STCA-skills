@@ -1,6 +1,6 @@
 ---
 name: winning-pitch-deck
-description: Craft or review a 3-minute founder pitch deck and speaker script using the DePitch framework. Use this skill whenever the user wants to build, draft, review, roast, tighten, or rehearse a pitch deck / pitch video / demo-day pitch / hackathon submission pitch / startup-competition pitch — even if they don't say the words "pitch deck" (e.g., "help me pitch my project", "I have 3 minutes to convince judges", "prep my Colosseum Frontier submission", "review my deck"). The framework is anchored in Colosseum Frontier conventions (3-min pitch video + 3-min demo video) but works for any short founder pitch to investors or judges.
+description: Craft or review a 3-minute Colosseum Frontier pitch deck using the DePitch framework. Triggers on "pitch deck", "pitch my project", "Colosseum submission", "review my deck", "roast my pitch".
 ---
 
 # Winning Pitch Deck (DePitch framework)
@@ -106,6 +106,24 @@ If the user mentions Colosseum Frontier, the Solana hackathon, or the accelerato
 - **Legends.fun QR trick:** the user can put a QR code on the closing slide linking to their Legends.fund page, so judges reviewing weeks later see *current* traction, not submission-day traction. Strong signal of "still building".
 - **Previous winners are public on the Colosseum site.** Recommend the founder watch 2–3 winning pitches in their category before finalizing.
 - **Interview follow-up.** If they pass the video filter, the interview tests solidity of business model, moat ("why can't anyone copy you tomorrow?"), and grit ("is this a company or a hackathon project?"). Flag this to the founder so they start preparing now, not later.
+
+## Turning the outline into slides
+
+The skill outputs a markdown outline — the founder still needs to build the actual deck. Recommend one of these tools based on the founder's design skill and timeline:
+
+| Tool | Best for | Notes |
+|---|---|---|
+| [Gamma](https://gamma.app) | Fastest path from outline to polished deck | Paste the outline and Gamma generates branded slides. Best for founders with no design skills or <24h to submission. |
+| [Canva](https://canva.com) | Founders who want visual control without learning design software | Startup pitch templates available. Drag-and-drop. Good for custom imagery and brand consistency. |
+| [Google Slides](https://slides.google.com) | Teams collaborating in real-time | Free, familiar, easy to share. Use a clean template — don't use the defaults. |
+| [Pitch](https://pitch.com) | Design-forward teams who want presentation analytics | Built for startup decks. Has collaboration + analytics (see which slides investors spend time on). |
+| [Figma](https://figma.com) | Founders who already use Figma | Figma Slides or community deck templates. Best if you're already in the Figma ecosystem. |
+
+**Key advice regardless of tool:**
+- Keep slides minimal — the outline says "one slide = one message" and that applies visually too
+- Pick two fonts, three colors, and use them consistently
+- Use high-quality images (Unsplash, Pexels) over clip art or stock illustrations
+- Export as PDF for backup, but present from the native tool for animations
 
 ## Reference files
 
