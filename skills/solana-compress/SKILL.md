@@ -68,38 +68,86 @@ solana-compress/
 ### Step 3 — Set up Light Protocol SDK
 
 ```bash
-npm install @lightprotocol/stateless.js @lightprotocol/compressed-token
+npm install @lightprotocol/stateless.js @lightprotocol/compressed-token @solana/web3.js
 ```
 
 **Dependencies:**
-- `@lightprotocol/stateless.js` — Core compression primitives
-- `@lightprotocol/compressed-token` — SPL token compression
-- A compatible RPC (Helius supports ZK Compression natively)
+- `@lightprotocol/stateless.js` — Core RPC, proof generation, compression primitives
+- `@lightprotocol/compressed-token` — Compressed token operations (mint, transfer)
+- A compression-compatible RPC — Helius has native support; alternatively use Light's own indexer + prover
+
+**RPC setup** — compressed tokens require three endpoints (Solana RPC, Photon Indexer, Light Prover):
+```typescript
+import { Rpc, createRpc } from "@lightprotocol/stateless.js";
+
+// Helius (single URL, routes internally)
+const rpc: Rpc = createRpc(process.env.HELIUS_RPC_URL);
+
+// Or explicit endpoints (devnet)
+const rpc: Rpc = createRpc(
+  "https://api.devnet.solana.com",
+  "https://indexer.devnet.lightprotocol.com",
+  "https://prover.devnet.lightprotocol.com",
+  { commitment: "confirmed" },
+);
+```
 
 ### Step 4 — Implement compressed token operations
 
 **Create a compressed token mint:**
 ```typescript
-import { createMint } from "@lightprotocol/compressed-token";
-import { buildAndSignTx, Rpc } from "@lightprotocol/stateless.js";
+import { createMintInterface } from "@lightprotocol/compressed-token";
+import { Keypair } from "@solana/web3.js";
 
-const rpc = createRpc(HELIUS_RPC_URL);
-const mint = await createMint(rpc, payer, authority, decimals);
+const mintSigner = Keypair.generate();
+const mintAuthority = Keypair.generate();
+
+const { mint, transactionSignature } = await createMintInterface(
+  rpc,
+  payer,                    // Signer — fee payer
+  mintAuthority.publicKey,  // mint authority
+  null,                     // freeze authority (optional)
+  9,                        // decimals
+  mintSigner,               // mint keypair
+);
+await rpc.confirmTransaction(transactionSignature, "confirmed");
 ```
 
-**Mint compressed tokens:**
+**Mint compressed tokens (also used for batch airdrops):**
 ```typescript
-import { mintTo } from "@lightprotocol/compressed-token";
+import { mintToCompressed } from "@lightprotocol/compressed-token";
+import { PublicKey } from "@solana/web3.js";
 
-await mintTo(rpc, payer, mint, destination, authority, amount);
+// Supports multiple recipients in a single transaction
+const recipients = [
+  { recipient: new PublicKey("..."), amount: 1_000_000_000n },
+  { recipient: new PublicKey("..."), amount: 5_000_000_000n },
+];
+
+const txId = await mintToCompressed(
+  rpc,
+  payer,         // Signer — fee payer
+  mint,          // PublicKey — the compressed mint
+  mintAuthority, // Signer — mint authority
+  recipients,    // Array<{ recipient: PublicKey; amount: bigint }>
+);
+await rpc.confirmTransaction(txId, "confirmed");
 ```
 
-**Batch airdrop:**
+**Transfer compressed tokens:**
 ```typescript
-import { compressedAirdrop } from "@lightprotocol/compressed-token";
+import { transfer } from "@lightprotocol/compressed-token";
 
-// Distribute to thousands of wallets in a single transaction
-await compressedAirdrop(rpc, payer, mint, recipients, amountPerRecipient);
+const txId = await transfer(
+  rpc,
+  payer,      // Signer — fee payer
+  mint,       // PublicKey — token mint
+  250n,       // amount
+  owner,      // Signer — token owner
+  recipient,  // PublicKey — destination
+  { commitment: "confirmed" },
+);
+await rpc.confirmTransaction(txId, "confirmed");
 ```
 
 ### Step 5 — Cost comparison
