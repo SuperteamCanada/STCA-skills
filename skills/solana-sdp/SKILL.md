@@ -9,7 +9,7 @@ Build enterprise-grade payment, tokenization, and trading products using the [So
 
 ## Why this matters now
 
-SDP launched March 24, 2026 with Mastercard, Worldpay, and Western Union as early adopters. Three modules cover the core fintech use cases on Solana:
+SDP launched March 24, 2026 with Mastercard, Worldpay, and Western Union as early adopters. It's designed to work out-of-the-box with AI coding platforms like Claude Code and OpenAI Codex. Three modules cover the core fintech use cases on Solana:
 
 > **⚠️ Early-stage platform.** SDP's public API documentation is limited as of April 2026. The workflow below is a guide based on announced capabilities — verify endpoints and SDK availability against [platform.solana.com](https://platform.solana.com) before building. Some steps may require waitlist access or partner onboarding.
 
@@ -123,8 +123,8 @@ If SDP sandbox access is unavailable or waitlisted, the same product categories 
 | SDP Module | Direct Alternative |
 |---|---|
 | Issuance | `@solana/spl-token` + Token-2022 extensions directly |
-| Payments | [Helio](https://www.hel.io/) or [Sphere](https://spherepay.co/) for on/off-ramp |
-| Trading | [Jupiter Aggregator API](https://station.jup.ag/docs/apis/swap-api) for swaps |
+| Payments | [Helio / MoonPay Commerce](https://www.hel.io/) or [Sphere](https://spherepay.co/) for on/off-ramp |
+| Trading | [Jupiter Swap V2 API](https://developers.jup.ag/docs/api-reference) for swaps |
 
 This loses the "single API" abstraction but lets you ship without waiting on SDP onboarding.
 

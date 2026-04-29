@@ -94,6 +94,8 @@ const rpc: Rpc = createRpc(
 
 ### Step 4 — Implement compressed token operations
 
+> **Note:** The examples below use the current v3 API (`createMintInterface`, `mintToCompressed`, `transfer`). The older `createMint` and `mintTo` exports still work but are deprecated. `compressedAirdrop` does not exist — use `mintToCompressed` with a recipients array instead.
+
 **Create a compressed token mint:**
 ```typescript
 import { createMintInterface } from "@lightprotocol/compressed-token";
